@@ -58,14 +58,10 @@
 		visibility: hidden;
 	}
 
-	.content_type_clase_fancy #actividad .content .header {
-		display: none;
-		background: #e94442;
-		margin: 0 -97px 40px;
-		padding-left: 150px;
-		padding-right: 40px;
-		position: relative;
-	}
+	#actividad .content .header {
+	    margin-bottom: 20px;
+	    display: none;
+	}	
 	.content_type_clase_fancy #actividad .content .header:before {
 		content: '';
     	display: none;
