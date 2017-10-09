@@ -37,7 +37,7 @@
 		background-image: none;
 		margin: 20px auto 30px;
 		padding: 0px;
-		padding-bottom: 90px;
+		padding-bottom:0px;
 		position: relative;
 	}
 
