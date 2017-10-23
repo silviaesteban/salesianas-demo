@@ -3,7 +3,7 @@
 	'use strict';
 
 	var salesianas_demo = function () {
-			blink.theme.styles.classic.apply(this, arguments);
+			blink.theme.styles.fancy.apply(this, arguments);
 		},
 		page = blink.currentPage;
 
@@ -31,7 +31,7 @@
 		},
 
 		init: function () {
-			var parent = blink.theme.styles.classic.prototype;
+			var parent = blink.theme.styles.fancy.prototype;
 			parent.init.call(this);
 			this.addActivityTitle();
 			this.addPageNumber();
@@ -39,7 +39,7 @@
 		},
 
 		removeFinalSlide: function () {
-			var parent = blink.theme.styles.classic.prototype;
+			var parent = blink.theme.styles.fancy.prototype;
 			parent.removeFinalSlide.call(this, true);
 		},
 
@@ -116,7 +116,7 @@
 		}
 	};
 
-	salesianas_demo.prototype = _.extend({}, new blink.theme.styles.classic(), salesianas_demo.prototype);
+	salesianas_demo.prototype = _.extend({}, new blink.theme.styles.fancy(), salesianas_demo.prototype);
 
 	blink.theme.styles.salesianas_demo = salesianas_demo;
 
@@ -124,7 +124,7 @@
 
 $(document).ready(function () {
 
-	$('body').addClass('content_type_curso_classic content_type_clase_classic ');
+	$('body').addClass('content_type_curso_fancy content_type_clase_fancy ');
 
     $('.item').find('.header').find('.title')
 		.filter(function () {
