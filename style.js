@@ -1,16 +1,17 @@
+
 (function (blink) {
 	'use strict';
 
-	var FancyStyle = function () {
-			blink.theme.styles.basic.apply(this, arguments);
+	var salesianas_demo = function () {
+			blink.theme.styles.classic.apply(this, arguments);
 		},
 		page = blink.currentPage;
 
-	FancyStyle.prototype = {
-		bodyClassName: 'content_type_clase_fancy',
+	salesianas_demo.prototype = {
+		bodyClassName: 'content_type_clase_salesianas_demo',
 		extraPlugins: ['image2'],
 		ckEditorStyles: {
-			name: 'fancy',
+			name: 'salesianas_demo',
 			styles: [
 
 				{ name: 'Título 1', element: 'h4', attributes: { 'class': 'bck-title1'} },
@@ -25,22 +26,20 @@
 
 				{ name: 'Caja 1', type: 'widget', widget: 'blink_box', attributes: { 'class': 'box-1' } },
 				{ name: 'Caja 2', type: 'widget', widget: 'blink_box', attributes: { 'class': 'box-2' } },
-				{ name: 'Caja 3', type: 'widget', widget: 'blink_box', attributes: { 'class': 'box-3' } },
-				{ name: 'Sabes', type: 'widget', widget: 'blink_box', attributes: { 'class': 'recuadro2' } },
+				{ name: 'Caja 3', type: 'widget', widget: 'blink_box', attributes: { 'class': 'box-3' } }
 			]
 		},
 
 		init: function () {
-			var parent = blink.theme.styles.basic.prototype;
+			var parent = blink.theme.styles.classic.prototype;
 			parent.init.call(this);
 			this.addActivityTitle();
 			this.addPageNumber();
 			this.formatCarouselindicators();
-			this.addSlideNavigators();
 		},
 
 		removeFinalSlide: function () {
-			var parent = blink.theme.styles.basic.prototype;
+			var parent = blink.theme.styles.classic.prototype;
 			parent.removeFinalSlide.call(this, true);
 		},
 
@@ -117,13 +116,15 @@
 		}
 	};
 
-	FancyStyle.prototype = _.extend({}, new blink.theme.styles.basic(), FancyStyle.prototype);
+	salesianas_demo.prototype = _.extend({}, new blink.theme.styles.classic(), salesianas_demo.prototype);
 
-	blink.theme.styles.fancy = FancyStyle;
+	blink.theme.styles.salesianas_demo = salesianas_demo;
 
 })( blink );
 
 $(document).ready(function () {
+
+	$('body').addClass('content_type_curso_classic content_type_clase_classic ');
 
     $('.item').find('.header').find('.title')
 		.filter(function () {
@@ -139,10 +140,41 @@ $(document).ready(function () {
 			$header.length && $header.html($header.html().replace(' ', ''));
 		});
 
+	if (!editar) {
+		blink.events.on('showSlide:after', function (index) {
+			poolReposition();
+		});
+	}
+
 	// BK-8433 cambiamos el logo de las slides por el del dominio
-	var src_logo = $('.content_type_clase_fancy').find('.logo_slide').attr('logo_dominio');
+	var src_logo = $('.content_type_clase_salesianas_demo').find('.logo_slide').attr('logo_dominio');
 	if (typeof(src_logo) != 'undefined' && src_logo && src_logo != '' && src_logo.indexOf('gif1x1.gif') == -1) {
-		$('.content_type_clase_fancy').find('.logo-publisher').css('background-image', "url('"+src_logo+"')");
+		$('.content_type_clase_salesianas_demo').find('.logo-publisher').css('background-image', "url('"+src_logo+"')");
 	}
 
 });
+
+$(window).load(function() {
+	if (!editar) {
+		poolReposition();
+	}
+});
+$(window).resize(function() {
+	if (!editar) {
+		poolReposition();
+	}
+});
+
+function poolReposition() {
+	$('.pool').each(function(i,e) {
+		var poolContainer = $(e).width();
+		var poolWidth = $(e).find('.rf-searchgamecontainer').width();
+		var wordContainerWidth = poolContainer-poolWidth-20;
+		if (wordContainerWidth > 150) {
+			$(e).find('.rf-wordcontainer').css('width', wordContainerWidth);
+		} else {
+			$(e).find('.rf-wordcontainer').css('width', poolWidth);
+		}
+	});
+}
+
